@@ -1,0 +1,24 @@
+{
+  "name": "menStackStarterKit",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node app.js"
+  },
+  "dependencies": {
+    "async": "2.0.1",
+    "bcrypt": "0.8.7",
+    "bluebird":"3.4.1",
+    "body-parser": "1.15.2",
+    "cookie-parser": "1.4.3",
+    "express": "4.14.0",
+    "express-validator":"2.20.8",
+    "jade": "1.11.0",
+    "jwt-simple": "0.5.0",
+    "lodash": "4.14.1",
+    "moment": "2.14.1",
+    "mongoose": "4.5.8",
+    "serve-favicon": "2.3.0",
+    "winston": "2.2.0"
+  }
+}
