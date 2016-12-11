@@ -42,21 +42,21 @@ npm start
 
 ```
 +- config
-|   +- config.js              --> configuration file where database configuration and
+|   +- index.js               --> configuration file where database configuration and
 |                                 host configuration are described
 +- controllers                --> controller files
 +- models                     --> models directories that communicate with the database
 |   +- definitions            --> database models are defined
 |   +- schemas                --> mongodb schemas are described
-|   +- services               --> database access layer that connects with the db models
+|   +- handlers               --> database access layer that connects with the db models
 |   +- db.connection.js       --> connect with mongodb
 |   +- models.js              --> initialize mongodb models
 +- node_modules               --> development dependencies node modules
 +- routes                     --> REST api routers
 +- utilities                  --> utilities files
 |   +- helpers                --> all helper files
-|   +- validator              --> api validators are described
-+- server.js                     --> application run file
+|   +- validators             --> api validators are described
++- server.js                  --> application run file
 +- package.json               --> node package configuration file
 ```
 
