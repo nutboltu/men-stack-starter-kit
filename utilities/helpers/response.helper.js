@@ -12,4 +12,6 @@ var send = function(err, data, res){
 
 };
 
-module.exports.send = send;
+module.exports = {
+    send: send
+};

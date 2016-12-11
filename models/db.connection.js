@@ -1,11 +1,9 @@
 'use strict';
 
-var config              = require('../config/config');
-var env                 = process.env.NODE_ENV || 'development';
+var dbConfig              = require('../config').db;
 var Promise             = require('bluebird');
 var mongoose            = new Promise.promisifyAll(require('mongoose'));
 
-var dbConfig            = config[env].db;
 var connectionString    = 'mongodb://' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.dbName;
 
 

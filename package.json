@@ -1,24 +1,31 @@
 {
-  "name": "menStackStarterKit",
-  "version": "0.0.1",
-  "private": true,
+  "name": "men-stack-starter-kit",
+  "version": "0.0.2",
+  "private": false,
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/NutBoltu/men-stack-starter-kit.git"
+  },
+  "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=production node app.js"
+    "start": "NODE_ENV=production node server.js",
+    "dev": "nodemon server.js"
+
   },
   "dependencies": {
-    "async": "2.0.1",
-    "bcrypt": "0.8.7",
-    "bluebird":"3.4.1",
-    "body-parser": "1.15.2",
-    "cookie-parser": "1.4.3",
-    "express": "4.14.0",
-    "express-validator":"2.20.8",
-    "jade": "1.11.0",
-    "jwt-simple": "0.5.0",
-    "lodash": "4.14.1",
-    "moment": "2.14.1",
-    "mongoose": "4.5.8",
-    "serve-favicon": "2.3.0",
-    "winston": "2.2.0"
+    "async": "^2.1.4",
+    "bcrypt": "^1.0.1",
+    "bluebird":"^3.4.6",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-validator":"^2.21.0",
+    "jwt-simple": "^0.5.1",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
+    "mongoose": "^4.7.2",
+    "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

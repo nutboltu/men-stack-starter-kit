@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Types.ObjectId;
 var userDefinition = require('../definitions/user.definition').userDefinition;
-var objectTransform = require('../../utilities/helpers/schema.object.transform');
+var objectTransform = require('../schema.object.transform.js');
 
 var userSchema = new Schema(userDefinition);
 
@@ -17,4 +17,6 @@ userSchema.pre('save' , function(next){
 
 userSchema.options.toObject = objectTransform;
 
-module.exports.userSchema = userSchema;
+module.exports ={
+    userSchema: userSchema
+};

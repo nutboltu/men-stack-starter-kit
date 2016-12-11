@@ -1,37 +1,48 @@
 'use strict';
 
 var responseHelper = require('../utilities/helpers/response.helper');
-var userService = require('../models/services//user.service');
+var userModelHandler = require('../models/handlers/user.model.handler');
 
+var add = function (req, res) {
+
+    userModelHandler.add(req.body, function (err, user) {
+        responseHelper.send(err, user, res);
+    });
+};
 
 var findAll = function (req, res) {
 
-    userService.findAll(req.query, function (err, users) {
+    var offset = req.params.offset || 0;
+    var limit = req.params.limit || 10;
+    userModelHandler.findAll(offset, limit, function (err, users) {
         responseHelper.send(err, users, res);
     });
 };
 
 var findById = function (req, res) {
-    userService.findById(req.body.userId, function (err, user) {
+    userModelHandler.findById(req.params.id, function (err, user) {
         responseHelper.send(err, user, res);
     });
 };
 
-var login = function (req, res) {
 
-    userService.login(req.body.email, req.body.password, function (err, data) {
-        responseHelper.send(err, data, res);
+var remove = function (req, res) {
+
+    userModelHandler.remove(req.params.id, function (err, removed) {
+        responseHelper.send(err, removed, res);
     });
 };
 
-var register = function (req, res) {
-
-    userService.register(req.body, function (err, user) {
+var update = function (req, res) {
+    userModelHandler.update(req.params.id, req.body, function (err, user) {
         responseHelper.send(err, user, res);
     });
 };
 
-module.exports.findAll = findAll;
-module.exports.findById = findById;
-module.exports.login = login;
-module.exports.register = register;
+module.exports = {
+    add: add,
+    findAll: findAll,
+    findById: findById,
+    remove: remove,
+    update: update
+};

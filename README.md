@@ -29,9 +29,9 @@ npm install
 
 ### For development
 ```
-node app.js
+npm run dev
 ```
-The app will run in http://localhost:1980
+The app will run in http://localhost:3000
 
 ### For Production
 ```
@@ -56,7 +56,7 @@ npm start
 +- utilities                  --> utilities files
 |   +- helpers                --> all helper files
 |   +- validator              --> api validators are described
-+- app.js                     --> application run file
++- server.js                     --> application run file
 +- package.json               --> node package configuration file
 ```
 

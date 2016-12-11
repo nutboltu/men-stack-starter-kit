@@ -8,9 +8,10 @@ var compareIt = function(password, hashedPassword, callback){
 };
 
 var hashIt = function(text, callback){
-
     bcrypt.hash(text, saltRounds , callback);
 };
 
-module.exports.compareIt = compareIt;
-module.exports.hashIt = hashIt;
+module.exports = {
+    compareIt: compareIt,
+    hashIt: hashIt
+};

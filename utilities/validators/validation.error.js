@@ -3,16 +3,19 @@
  */
 'use strict';
 
-var errorResponse = require('../helpers/enums').errorResponse;
+var errorHandler = require('../helpers/error.handler');
 
 var processErrors = function(req, res, next){
 
     var validationErrors = req.validationErrors();
     if(validationErrors){
-        logger.error(errorResponse.INVALID_PARAMETER.message);
-        res.status(400).json(errorResponse.INVALID_PARAMETER);
+        logger.error(validationErrors);
+        var error = errorHandler[validationErrors[0].msg] || errorHandler.INVALID_PARAMETER;
+        res.status(error.code).json(error.message);
     }
     else next();
 };
 
-module.exports.processErrors = processErrors;
+module.exports = {
+    processErrors: processErrors
+};

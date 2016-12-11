@@ -1,21 +1,17 @@
 'use strict';
-
-var async           = require('async');
 var errorHandler  = require('./error.handler');
 var jwt             = require('jwt-simple');
-var secret          = require('../../config/config').secret;
+var secret          = require('../../config').jwtSecret;
 var algorithm       =   'HS512';
 
 var encodeToken = function(payload, callback){
-
     try{
-        var token = jwt.encode(payload , secret, algorithm);
+        var token = jwt.encode(payload, secret, algorithm);
         callback(null, token);
     }
     catch(err){
         callback(err);
     }
-
 };
 
 var decodeToken = function(payload, callback){
@@ -28,38 +24,31 @@ var decodeToken = function(payload, callback){
     }
 };
 
-var validateToken = function(req , res, next){
-    var tasks = [
-        function(cb){
-            var payload = req.headers['x-access-token'];
-            if(payload){
-                cb(null, payload);
+var validateToken = function(token, callback){
 
+    if(token){
+        decodeToken(token, function(err, decodedPayload){
+            if(err || !decodedPayload){
+                return callback(errorHandler.INVALID_ACCESS_TOKEN);
             }
-            else return cb(errorHandler.INVALID_ACCESS_TOKEN);
-        },
-        function(payload , cb){
+            else if (decodedPayload.exp <= Date.now()){
+                return callback(errorHandler.ACCESS_TOKEN_EXPIRED);
+            }
+            else if (decodedPayload.exp <= Date.now()){
+                return callback(errorHandler.ACCESS_TOKEN_EXPIRED)
+            }
+            else{
+                callback(null, decodedPayload);
+            }
+        });
 
-            decodeToken(payload, function(err, decodedPayload){
-                if(err || !decodedPayload){
-                    return cb(errorHandler.INVALID_ACCESS_TOKEN);
-                }
-                else if (decodedPayload.exp <= Date.now()){
-                    return cb(errorHandler.ACCESS_TOKEN_EXPIRED);
-                }
-                else if (decodedPayload.exp <= Date.now()){
-                    return cb(errorHandler.ACCESS_TOKEN_EXPIRED)
-                }
-                else{
-                    cb(null, decodedPayload);
-                }
-            });
-        }
-    ];
+    }
+    else return callback(errorHandler.INVALID_ACCESS_TOKEN);
 
-    async.waterfall(tasks, next);
 };
 
-module.exports.encodeToken = encodeToken;
-module.exports.decodeToken = decodeToken;
-module.exports.validateToken = validateToken;
+module.exports = {
+    encodeToken: encodeToken,
+    decodeToken: decodeToken,
+    validateToken: validateToken
+};
