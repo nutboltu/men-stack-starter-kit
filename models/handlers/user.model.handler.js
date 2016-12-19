@@ -3,8 +3,6 @@
 var async           = require('async');
 var errorHandler    = require('../../utilities/helpers/error.handler');
 var hashHelper      = require('../../utilities/helpers/hash.helper');
-var jwtHelper       = require('../../utilities/helpers/jwt.token.helper');
-var moment         = require('moment');
 var userModel       = require('../models').Models.userModel;
 
 var add = function(newUser, cb){
@@ -68,6 +66,18 @@ var findAll = function(offset, limit, cb){
         })
 };
 
+var findByEmail = function(email, cb){
+    userModel.findOne({
+        email: email
+    },function(err, user){
+        if(err){
+            logger.error(errorHandler.INTERNAL_DB_ERROR.message);
+            cb(errorHandler.INTERNAL_DB_ERROR);
+        }
+        else cb(err, user);
+    })
+};
+
 var findById = function(id, cb){
     userModel.findOne({
         _id: id
@@ -115,6 +125,7 @@ module.exports = {
     add: add,
     findAll: findAll,
     findById: findById,
+    findByEmail: findByEmail,
     remove: remove,
     update: update
 };
